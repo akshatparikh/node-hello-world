@@ -9,5 +9,10 @@ const server = http.createServer((req, res) => {
 
 server.listen(port, () => {
   console.log(`Server running on http://localhost:${port}/`);
-  console.log('SUCCESS');
 });
+
+process.on('SIGTERM', () => {
+  server.close(() => {
+    console.log('Process terminated')
+  })
+})
